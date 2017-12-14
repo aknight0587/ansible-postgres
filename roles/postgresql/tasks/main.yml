@@ -1,0 +1,24 @@
+---
+# Installs Postgresql
+# Alex Knight
+- name: Add a postgres group
+  group: name=postgres
+
+- name: Add a postgres user
+  user: name=postgres group=postgres home=/home/postgres
+
+- name: Install postgresql server
+  yum: name=postgresql-server state=present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install postgresql contrib
+  yum: name=postgresql-contrib state=present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install postgresql server
+  apt: name=postgresql state=present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install postgresql contrib
+  apt: name=postgresql-contrib state=present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
