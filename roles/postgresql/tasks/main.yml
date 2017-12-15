@@ -25,6 +25,8 @@
 
 - name: Initialize Postgres DB
   command: /etc/rc.d/init.d/postgresql initdb
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Start Postgres DB
   command: /etc/rc.d/init.d/postgresql start
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
