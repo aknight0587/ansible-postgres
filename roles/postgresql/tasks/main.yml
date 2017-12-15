@@ -22,3 +22,9 @@
 - name: Install postgresql contrib
   apt: name=postgresql-contrib state=present
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Initialize Postgres DB
+  command: /etc/rc.d/init.d/postgresql initdb
+
+- name: Start Postgres DB
+  command: /etc/rc.d/init.d/postgresql start
