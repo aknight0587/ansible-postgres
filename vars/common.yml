@@ -1,0 +1,3 @@
+postgres_group: postgres
+postgres_user: postgres
+postgres_user_home: /home/postgres

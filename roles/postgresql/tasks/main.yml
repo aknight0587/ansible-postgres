@@ -2,10 +2,10 @@
 # Installs Postgresql
 # Alex Knight
 - name: Add a postgres group
-  group: name=postgres
+  group: name={{ postgres_group }}
 
 - name: Add a postgres user
-  user: name=postgres group=postgres home=/home/postgres
+  user: name={{ postgres_user }} group={{ postgres_group }} home={{ postgres_user_home }}
 
 - name: Install postgresql server
   yum: name=postgresql-server state=present
@@ -24,9 +24,9 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Initialize Postgres DB
-  command: /etc/rc.d/init.d/postgresql initdb
+  command: postgresql-setup initdb
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Start Postgres DB
-  command: /etc/rc.d/init.d/postgresql start
+  command: systemctl start postgresql
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
